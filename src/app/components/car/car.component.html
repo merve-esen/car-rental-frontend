@@ -7,11 +7,13 @@
       <th>Marka</th>
       <th>Renk</th>
       <th>Günlük Fiyat</th>
+      <th></th>
     </tr>
   </thead>
   <tr *ngFor="let car of cars">
     <td>{{ car.brandName }}</td>
     <td>{{ car.colorName }}</td>
     <td>{{ car.dailyPrice }}</td>
+    <td><button type="button" class="btn btn-info" routerLink="/cars/{{car.id}}">Detay</button></td>
   </tr>
 </table>
