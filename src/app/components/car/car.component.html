@@ -1,19 +1,17 @@
-<div *ngIf="dataLoaded==false" class="spinner-border text-warning" role="status">
-  <span class="visually-hidden">Loading...</span>
+<div
+  *ngIf="
+    dataLoaded && (carDetails | filterCarDetail: carFilterText).length == 0
+  "
+  class="alert alert-info w-100"
+  role="alert"
+>
+  Kayıt bulunamadı
 </div>
-<table *ngIf="dataLoaded==true" class="table">
-  <thead>
-    <tr>
-      <th>Marka</th>
-      <th>Renk</th>
-      <th>Günlük Fiyat</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tr *ngFor="let car of cars">
-    <td>{{ car.brandName }}</td>
-    <td>{{ car.colorName }}</td>
-    <td>{{ car.dailyPrice }}</td>
-    <td><button type="button" class="btn btn-info" routerLink="/cars/{{car.id}}">Detay</button></td>
-  </tr>
-</table>
+<div id="cars-list" class="row mx-3">
+  <app-loading-spinner *ngIf="!dataLoaded"></app-loading-spinner>
+  <app-car-card
+    *ngFor="let carDetail of carDetails | filterCarDetail: carFilterText"
+    [carDetail]="carDetail"
+    class="{{ class }} p-3 pt-0"
+  ></app-car-card>
+</div>

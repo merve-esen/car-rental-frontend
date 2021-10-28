@@ -1,5 +1,9 @@
+<div class="mb-3">
+  <label for="filterText" class="form-label">Marka ara</label>
+  <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="">
+</div>
 <ul class="list-group">
-  <li [class]="getAllBrandClass()" (click)="resetCurrentBrand()" routerLink = "/cars">Tüm Arabalar</li>
+  <li [class]="getAllBrandClass()" (click)="resetCurrentBrand()" routerLink = "/cars">Tüm Markalar</li>
   <li
     (click)="setCurrentBrand(brand)"
     routerLink="/cars/brand/{{brand.name}}"

@@ -1,7 +1,8 @@
-import { CarService } from './../../services/car.service';
-import { Component, OnInit } from '@angular/core';
-import { CarDetail } from 'src/app/models/carDetail';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { CarDetail } from 'src/app/models/carDetail';
+import { CarService } from './../../services/car.service';
+//import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-car',
@@ -9,50 +10,57 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./car.component.css'],
 })
 export class CarComponent implements OnInit {
-  cars: CarDetail[] = [];
-  dataLoaded = false;
+  carDetails: CarDetail[] = [];
+  dataLoaded: boolean = false;
 
-  constructor(private carService: CarService, private activatedRoute:ActivatedRoute) {}
+  @Input() carFilterText: string = '';
+  @Input() class: string = '';
+
+  constructor(
+    private carService: CarService,
+    private activatedRoute: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe(params=>{
-      if(params["brandName"] && params["colorName"]){
-        this.getCarsByBrandAndColor(params["brandName"], params["colorName"])
-      } else if(params["brandName"]){
-        this.getCarsByBrand(params["brandName"])
-      } else if(params["colorName"]){
-        this.getCarsByColor(params["colorName"])
-      } else {
-        this.getCars()
-      }
-    })
+    this.activatedRoute.queryParams.subscribe((params) => {
+      if (params['brand'] && params['color'])
+        this.getCarDetailsByBrandNameAndColorName(
+          params['brand'],
+          params['color']
+        );
+      else if (params['brand']) this.getCarDetailsByBrand(params['brand']);
+      else if (params['color']) this.getCarDetailsByColor(params['color']);
+      else this.getCarDetails();
+    });
   }
 
-  getCars() {
+  getCarDetails() {
     this.carService.getCarDetails().subscribe((response) => {
-      this.cars = response.data;
+      this.carDetails = response.data;
       this.dataLoaded = true;
     });
   }
 
-  getCarsByBrand(brandName: string) {
+  getCarDetailsByBrand(brandName: string) {
     this.carService.getCarsByBrand(brandName).subscribe((response) => {
-      this.cars = response.data;
+      this.carDetails = response.data;
       this.dataLoaded = true;
     });
   }
 
-  getCarsByColor(colorName: string) {
+  getCarDetailsByColor(colorName: string) {
     this.carService.getCarsByColor(colorName).subscribe((response) => {
-      this.cars = response.data;
+      this.carDetails = response.data;
       this.dataLoaded = true;
     });
   }
 
-  getCarsByBrandAndColor(brandName: string, colorName: string) {
-    this.carService.getCarsByBrandAndColor(brandName, colorName).subscribe((response) => {
-      this.cars = response.data;
-      this.dataLoaded = true;
-    });
+  getCarDetailsByBrandNameAndColorName(brandName: string, colorName: string) {
+    this.carService
+      .getCarsByBrandAndColor(brandName, colorName)
+      .subscribe((response) => {
+        this.carDetails = response.data;
+        this.dataLoaded = true;
+      });
   }
 }

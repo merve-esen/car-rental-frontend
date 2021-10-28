@@ -11,6 +11,7 @@ export class BrandComponent implements OnInit {
   brands: Brand[] = [];
   currentBrand: Brand; // Normalde Brand = {id:0, name:""} dememiz gerekiyordu ama tsconfig.ts
   //dosyasında "strictPropertyInitialization": false, eklediğimiz için gerek kalmadı.
+  filterText="";
 
   constructor(private brandService: BrandService) {}
 
