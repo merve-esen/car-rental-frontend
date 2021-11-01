@@ -9,9 +9,9 @@ import { BrandService } from 'src/app/services/brand.service';
 })
 export class BrandComponent implements OnInit {
   brands: Brand[] = [];
-  currentBrand: Brand; // Normalde Brand = {id:0, name:""} dememiz gerekiyordu ama tsconfig.ts
+  //currentBrand: Brand; // Normalde Brand = {id:0, name:""} dememiz gerekiyordu ama tsconfig.ts
   //dosyasında "strictPropertyInitialization": false, eklediğimiz için gerek kalmadı.
-  filterText="";
+  //filterText="";
 
   constructor(private brandService: BrandService) {}
 
@@ -25,7 +25,7 @@ export class BrandComponent implements OnInit {
     });
   }
 
-  setCurrentBrand(brand: Brand) {
+  /*setCurrentBrand(brand: Brand) {
     this.currentBrand = brand;
   }
 
@@ -47,5 +47,5 @@ export class BrandComponent implements OnInit {
     } else {
       return 'list-group-item';
     }
-  }
+  }*/
 }

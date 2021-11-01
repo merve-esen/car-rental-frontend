@@ -1,0 +1,58 @@
+<div class="content">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header"><h5 class="title">Araba Ekle</h5></div>
+      <div class="card-body">
+        <form [formGroup]="carAddForm">
+          <div class="mb-3">
+            <label for="description">Araba Açıklaması</label>
+            <div class="form-group">
+              <input type="text" id="description" formControlName="description"
+                class="form-control" placeholder="Araba Açıklaması"
+              />
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="brandId">Marka</label>
+            <div class="form-group">
+                <input type="number"
+                id="brandId"
+                formControlName="brandId" class="form-control"
+                placeholder="Marka"/>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="colorId">Renk</label>
+            <div class="form-group">
+                <input type="number"
+                id="colorId"
+                formControlName="colorId" class="form-control"
+                placeholder="Renk"/>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="modelYear">Model Yılı</label>
+            <div class="form-group">
+                <input type="number"
+                id="modelYear"
+                formControlName="modelYear" class="form-control"
+                placeholder="Model Yılı"/>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="dailyPrice">Günlük Fiyat</label>
+            <div class="form-group">
+                <input type="number"
+                id="dailyPrice"
+                formControlName="dailyPrice" class="form-control"
+                placeholder="Günlük Fiyat"/>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="card-footer">
+        <button class="btn btn-fill btn-primary" (click)="add()">Ekle</button>
+      </div>
+    </div>
+  </div>
+</div>

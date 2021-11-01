@@ -9,7 +9,7 @@ import { Color } from 'src/app/models/color';
 })
 export class ColorComponent implements OnInit {
   colors: Color[] = [];
-  currentColor: Color; // Normalde Color = {id:0, name:""} dememiz gerekiyordu ama tsconfig.ts
+  //currentColor: Color; // Normalde Color = {id:0, name:""} dememiz gerekiyordu ama tsconfig.ts
   //dosyasında "strictPropertyInitialization": false, eklediğimiz için gerek kalmadı.
 
   constructor(private colorService: ColorService) {}
@@ -24,7 +24,7 @@ export class ColorComponent implements OnInit {
     });
   }
 
-  setCurrentColor(color: Color) {
+  /*setCurrentColor(color: Color) {
     this.currentColor = color;
   }
 
@@ -46,5 +46,5 @@ export class ColorComponent implements OnInit {
     } else {
       return 'list-group-item';
     }
-  }
+  }*/
 }

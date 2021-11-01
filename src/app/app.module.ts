@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -22,6 +22,14 @@ import { FilterCarPipe } from './pipes/filter-car.pipe';
 import { CarCardComponent } from './components/car-card/car-card.component';
 import { FilterCarDetailPipe } from './pipes/filter-car-detail.pipe';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
+import { CarAddComponent } from './components/car-add/car-add.component';
+import { ColorAddComponent } from './components/color-add/color-add.component';
+import { BrandAddComponent } from './components/brand-add/brand-add.component';
+import { BrandEditComponent } from './components/brand-edit/brand-edit.component';
+import { ColorEditComponent } from './components/color-edit/color-edit.component';
+import { CarEditComponent } from './components/car-edit/car-edit.component';
+import { CarListComponent } from './components/car-list/car-list.component';
+import { CarImageComponent } from './components/car-image/car-image.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +47,15 @@ import { LoadingSpinnerComponent } from './components/loading-spinner/loading-sp
     FilterCarPipe,
     CarCardComponent,
     FilterCarDetailPipe,
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
+    CarAddComponent,
+    ColorAddComponent,
+    BrandAddComponent,
+    BrandEditComponent,
+    ColorEditComponent,
+    CarEditComponent,
+    CarListComponent,
+    CarImageComponent
   ],
   imports: [
     BrowserModule,
@@ -47,6 +63,7 @@ import { LoadingSpinnerComponent } from './components/loading-spinner/loading-sp
     HttpClientModule,
     FormsModule,
     BrowserAnimationsModule,
+    ReactiveFormsModule,
     ToastrModule.forRoot({
       positionClass: "toast-bottom-right"
     })
