@@ -6,6 +6,7 @@ import { BrandService } from 'src/app/services/brand.service';
   selector: 'app-brand',
   templateUrl: './brand.component.html',
   styleUrls: ['./brand.component.css'],
+  providers: [BrandService]
 })
 export class BrandComponent implements OnInit {
   brands: Brand[] = [];

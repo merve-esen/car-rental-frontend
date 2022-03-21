@@ -14,7 +14,8 @@ import { CarImageService } from 'src/app/services/car-image.service';
 @Component({
   selector: 'app-car-edit',
   templateUrl: './car-edit.component.html',
-  styleUrls: ['./car-edit.component.css']
+  styleUrls: ['./car-edit.component.css'],
+  providers: [CarService, BrandService, ColorService, CarImageService]
 })
 export class CarEditComponent implements OnInit {
 

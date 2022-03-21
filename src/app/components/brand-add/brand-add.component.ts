@@ -6,7 +6,8 @@ import { BrandService } from 'src/app/services/brand.service';
 @Component({
   selector: 'app-brand-add',
   templateUrl: './brand-add.component.html',
-  styleUrls: ['./brand-add.component.css']
+  styleUrls: ['./brand-add.component.css'],
+  providers: [BrandService]
 })
 export class BrandAddComponent implements OnInit {
 

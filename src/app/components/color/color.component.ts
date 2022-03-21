@@ -6,6 +6,7 @@ import { Color } from 'src/app/models/color';
   selector: 'app-color',
   templateUrl: './color.component.html',
   styleUrls: ['./color.component.css'],
+  providers: [ColorService]
 })
 export class ColorComponent implements OnInit {
   colors: Color[] = [];

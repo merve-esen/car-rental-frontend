@@ -15,7 +15,8 @@ import { RentalService } from 'src/app/services/rental.service';
 @Component({
   selector: 'app-car-detail',
   templateUrl: './car-detail.component.html',
-  styleUrls: ['./car-detail.component.css']
+  styleUrls: ['./car-detail.component.css'],
+  providers: [BrandService, CarImageService, CarService, ColorService, RentalService]
 })
 export class CarDetailComponent implements OnInit {
 

@@ -8,7 +8,8 @@ import { ColorService } from 'src/app/services/color.service';
 @Component({
   selector: 'app-color-edit',
   templateUrl: './color-edit.component.html',
-  styleUrls: ['./color-edit.component.css']
+  styleUrls: ['./color-edit.component.css'],
+  providers: [ColorService]
 })
 export class ColorEditComponent implements OnInit {
   color!: Color;

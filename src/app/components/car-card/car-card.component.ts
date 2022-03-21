@@ -7,6 +7,7 @@ import { CarImageService } from 'src/app/services/car-image.service';
   selector: 'app-car-card',
   templateUrl: './car-card.component.html',
   styleUrls: ['./car-card.component.css'],
+  providers: [CarImageService]
 })
 export class CarCardComponent implements OnInit {
   @Input() carDetail!: CarDetail;

@@ -8,7 +8,8 @@ import { BrandService } from 'src/app/services/brand.service';
 @Component({
   selector: 'app-brand-edit',
   templateUrl: './brand-edit.component.html',
-  styleUrls: ['./brand-edit.component.css']
+  styleUrls: ['./brand-edit.component.css'],
+  providers: [BrandService]
 })
 export class BrandEditComponent implements OnInit {
   brand!: Brand;

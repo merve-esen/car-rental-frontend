@@ -8,7 +8,8 @@ import { ColorService } from 'src/app/services/color.service';
 @Component({
   selector: 'app-side-bar',
   templateUrl: './side-bar.component.html',
-  styleUrls: ['./side-bar.component.css']
+  styleUrls: ['./side-bar.component.css'],
+  providers: [BrandService, ColorService]
 })
 export class SideBarComponent implements OnInit {
 

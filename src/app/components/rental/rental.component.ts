@@ -6,6 +6,7 @@ import { RentalDetail } from 'src/app/models/rentalDetail';
   selector: 'app-rental',
   templateUrl: './rental.component.html',
   styleUrls: ['./rental.component.css'],
+  providers: [RentalService]
 })
 export class RentalComponent implements OnInit {
   rentals: RentalDetail[] = [];

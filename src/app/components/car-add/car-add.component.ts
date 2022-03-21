@@ -6,7 +6,8 @@ import { CarService } from 'src/app/services/car.service';
 @Component({
   selector: 'app-car-add',
   templateUrl: './car-add.component.html',
-  styleUrls: ['./car-add.component.css']
+  styleUrls: ['./car-add.component.css'],
+  providers: [CarService]
 })
 export class CarAddComponent implements OnInit {
 
