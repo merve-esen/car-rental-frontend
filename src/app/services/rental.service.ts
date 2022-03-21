@@ -7,9 +7,7 @@ import { environment } from 'src/environments/environment';
 import { Rental } from '../models/rental';
 import { ResponseModel } from '../models/responseModel';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class RentalService {
 
   apiControllerUrl = `${environment.apiUrl}/rentals`;

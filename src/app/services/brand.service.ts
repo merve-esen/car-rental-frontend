@@ -7,9 +7,7 @@ import { environment } from 'src/environments/environment';
 import { SingleResponseModel } from '../models/singleResponseModel';
 import { ResponseModel } from '../models/responseModel';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class BrandService {
 
   apiControllerUrl = `${environment.apiUrl}/brands`;

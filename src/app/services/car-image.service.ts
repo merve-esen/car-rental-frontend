@@ -6,9 +6,7 @@ import { CarImage } from './../models/carImage';
 import { ListResponseModel } from './../models/listResponseModel';
 import { ResponseModel } from '../models/responseModel';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class CarImageService {
   apiControllerUrl = `${environment.apiUrl}/carImages`;
 

@@ -7,9 +7,7 @@ import { RegisterModel } from './../models/registerModel';
 import { SingleResponseModel } from '../models/singleResponseModel';
 import { Observable } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class AuthService {
   apiControllerUrl = `${environment.apiUrl}/auth`;
 
