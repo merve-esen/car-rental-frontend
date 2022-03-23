@@ -33,6 +33,7 @@ import { CarImageComponent } from './components/car-image/car-image.component';
 import { LoginComponent } from './components/login/login.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { RegisterComponent } from './components/register/register.component';
+import { AuthService } from './services/auth.service';
 
 @NgModule({
   declarations: [
@@ -74,7 +75,8 @@ import { RegisterComponent } from './components/register/register.component';
     })
   ],
   providers: [
-    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
+    AuthService
   ],
   bootstrap: [AppComponent]
 })
