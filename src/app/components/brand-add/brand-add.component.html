@@ -10,6 +10,8 @@
               <input type="text" id="brandName" formControlName="name"
                 class="form-control" placeholder="Marka Adı"
               />
+              <div *ngIf="brandAddForm.get('name')?.hasError('required') && brandAddForm.get('name')?.dirty"
+                class="alert alert-danger">Marka adı gereklidir</div>
             </div>
           </div>
         </form>
