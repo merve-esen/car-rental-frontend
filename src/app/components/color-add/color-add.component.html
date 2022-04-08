@@ -10,6 +10,8 @@
               <input type="text" id="colorName" formControlName="name"
                 class="form-control" placeholder="Renk Adı"
               />
+              <div *ngIf="colorAddForm.get('name')?.hasError('required') && colorAddForm.get('name')?.dirty"
+                class="alert alert-danger">Renk adı gereklidir</div>
             </div>
           </div>
         </form>
