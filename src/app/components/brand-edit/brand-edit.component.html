@@ -11,6 +11,8 @@
           class="form-control"
           placeholder="Marka Adı"
         />
+        <div *ngIf="brandEditForm.get('name')?.hasError('required') && brandEditForm.get('name')?.dirty"
+                class="alert alert-danger">Marka adı gereklidir</div>
       </div>
     </form>
   </div>
