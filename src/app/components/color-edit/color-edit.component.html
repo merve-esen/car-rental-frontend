@@ -11,6 +11,8 @@
           class="form-control"
           placeholder="Renk Adı"
         />
+        <div *ngIf="colorEditForm.get('name')?.hasError('required') && colorEditForm.get('name')?.dirty"
+                class="alert alert-danger">Renk adı gereklidir</div>
       </div>
     </form>
   </div>
