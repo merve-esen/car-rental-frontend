@@ -75,7 +75,7 @@
         </div>
       </div>
       <div class="form-group mb-3">
-        <label for="daily-price-input" class="fw-bold mb-3">Günlü Fiyat</label>
+        <label for="daily-price-input" class="fw-bold mb-3">Günlük Fiyat</label>
         <input
           type="number"
           formControlName="dailyPrice"
@@ -83,6 +83,8 @@
           class="form-control"
           placeholder="Daily Price"
         />
+        <div *ngIf="carEditForm.get('dailyPrice')?.hasError('required') && carEditForm.get('dailyPrice')?.dirty"
+                class="alert alert-danger">Günlük fiyat gereklidir</div>
       </div>
       <div class="form-group mb-3">
         <label for="model-year-input" class="fw-bold mb-3">Model Yılı</label>
@@ -93,6 +95,8 @@
           class="form-control"
           placeholder="Model Year"
         />
+        <div *ngIf="carEditForm.get('modelYear')?.hasError('required') && carEditForm.get('modelYear')?.dirty"
+                class="alert alert-danger">Model yılı gereklidir</div>
       </div>
       <div class="form-group mb-3">
         <label for="description-input" class="fw-bold mb-3">Açıklama</label>
