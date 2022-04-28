@@ -15,7 +15,7 @@ export class CarListComponent implements OnInit {
   dataLoaded: boolean = false;
 
   @Input() carFilterText: string = '';
-  @Input() class: string = '';
+  @Input() class: string = 'col-lg-4 col-xxl-3 mb-4';
 
   constructor(
     private carService: CarService,
