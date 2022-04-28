@@ -7,7 +7,7 @@
 >
   Kayıt bulunamadı
 </div>
-<div id="cars-list" class="row mx-3">
+<div id="cars-list" class="row">
   <app-loading-spinner *ngIf="!dataLoaded"></app-loading-spinner>
   <app-car-card
     *ngFor="let carDetail of carDetails | filterCarDetail: carFilterText"
