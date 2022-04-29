@@ -33,7 +33,7 @@ export class RegisterComponent implements OnInit {
 
       this.authService.register(registerModel).subscribe(response=>{
         localStorage.setItem("token", response.data.token)
-        this.toastrService.info(response.message)
+        this.toastrService.info("Kayıt başarılı")
       }, responseError=>{
         this.toastrService.error(responseError.error)
       })
