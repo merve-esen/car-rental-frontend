@@ -7,7 +7,7 @@
      <ul class="list-unstyled">
         <li><b>Renk: </b>{{ carDetail.colorName }}</li>
         <li><b>Model Yılı: </b>{{ carDetail.modelYear }}</li>
-        <li><b>Günlük Ücret: </b>{{ carDetail.dailyPrice | currency : '₺ '  }}</li>
+        <li><b>Günlük Ücret: </b>{{ carDetail.dailyPrice | currency : '₺ ' }}</li>
      </ul>
 
      <button routerLink="/car/{{ carDetail.carId }}"
