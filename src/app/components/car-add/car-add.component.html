@@ -1,57 +1,64 @@
 <div class="content">
   <div class="col-md-12">
     <div class="card">
-      <div class="card-header"><h5 class="title">Araba Ekle</h5></div>
+      <div class="card-header">
+        <h5 class="title">Araba Ekle</h5>
+      </div>
       <div class="card-body">
         <form [formGroup]="carAddForm">
           <div class="mb-3">
-            <label for="description">Araba Açıklaması</label>
-            <div class="form-group">
-              <input type="text" id="description" formControlName="description"
-                class="form-control" placeholder="Araba Açıklaması"
-              />
-              <div *ngIf="carAddForm.get('description')?.hasError('required') && carAddForm.get('description')?.dirty"
-                class="alert alert-danger">Araba açıklaması gereklidir</div>
-            </div>
+            <label for="brands">Marka</label>
+            <select class="form-select" id="brands" formControlName="brandId">
+              <option *ngFor="let brand of brands" [ngValue]="brand.id">
+                {{ brand.name }}
+              </option>
+            </select>
           </div>
           <div class="mb-3">
-            <label for="brandId">Marka</label>
-            <div class="form-group">
-                <input type="number"
-                id="brandId"
-                formControlName="brandId" class="form-control"
-                placeholder="Marka"/>
-            </div>
+            <label for="colors">Renk</label>
+            <select class="form-select" id="colors" formControlName="colorId">
+              <option *ngFor="let color of colors" [ngValue]="color.id">
+                 {{ color.name }}
+              </option>
+           </select>
           </div>
           <div class="mb-3">
-            <label for="colorId">Renk</label>
+            <label for="description">Model Adı / Açıklama</label>
             <div class="form-group">
-                <input type="number"
-                id="colorId"
-                formControlName="colorId" class="form-control"
-                placeholder="Renk"/>
+              <input type="text" id="description" formControlName="description" class="form-control"
+                placeholder="Model Adı / Açıklama" />
+              <div *ngIf="
+                  carAddForm.get('description')?.hasError('required') &&
+                  carAddForm.get('description')?.dirty
+                " class="alert alert-danger">
+                Model adı / açıklama gereklidir
+              </div>
             </div>
           </div>
           <div class="mb-3">
             <label for="modelYear">Model Yılı</label>
             <div class="form-group">
-                <input type="number"
-                id="modelYear"
-                formControlName="modelYear" class="form-control"
-                placeholder="Model Yılı"/>
-                <div *ngIf="carAddForm.get('modelYear')?.hasError('required') && carAddForm.get('modelYear')?.dirty"
-                class="alert alert-danger">Model yılı gereklidir</div>
+              <input type="number" id="modelYear" formControlName="modelYear" class="form-control"
+                placeholder="Model Yılı" />
+              <div *ngIf="
+                  carAddForm.get('modelYear')?.hasError('required') &&
+                  carAddForm.get('modelYear')?.dirty
+                " class="alert alert-danger">
+                Model yılı gereklidir
+              </div>
             </div>
           </div>
           <div class="mb-3">
             <label for="dailyPrice">Günlük Fiyat</label>
             <div class="form-group">
-                <input type="number"
-                id="dailyPrice"
-                formControlName="dailyPrice" class="form-control"
-                placeholder="Günlük Fiyat"/>
-                <div *ngIf="carAddForm.get('dailyPrice')?.hasError('required') && carAddForm.get('dailyPrice')?.dirty"
-                class="alert alert-danger">Günlük fiyat gereklidir</div>
+              <input type="number" id="dailyPrice" formControlName="dailyPrice" class="form-control"
+                placeholder="Günlük Fiyat" />
+              <div *ngIf="
+                  carAddForm.get('dailyPrice')?.hasError('required') &&
+                  carAddForm.get('dailyPrice')?.dirty
+                " class="alert alert-danger">
+                Günlük fiyat gereklidir
+              </div>
             </div>
           </div>
         </form>

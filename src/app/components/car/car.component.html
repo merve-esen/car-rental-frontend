@@ -6,15 +6,15 @@
 </div>
 
 <div class="card p-2 rounded-2 shadow-xl">
-  <table class="table table-hover">
+  <table class="table table-hover align-middle">
     <thead class="card-header">
       <tr class="text-uppercase">
         <th scope="col">Id</th>
         <th scope="col">Marka</th>
         <th scope="col">Renk</th>
+        <th scope="col">Model Adı / Açıklama</th>
         <th scope="col">Model Yılı</th>
         <th scope="col">Günlük Fiyat</th>
-        <th scope="col">Açıklama</th>
         <th scope="col"></th>
       </tr>
     </thead>
@@ -23,15 +23,14 @@
         <th scope="row">{{ carDetail.carId }}</th>
         <td>{{ carDetail.brandName | titlecase }}</td>
         <td>{{ carDetail.colorName | titlecase }}</td>
+        <td>{{ carDetail.carName | titlecase }}</td>
         <td>{{ carDetail.modelYear }}</td>
         <td>{{ carDetail.dailyPrice | currency }}</td>
-        <td>{{ carDetail.carName | titlecase }}</td>
         <td class="justify-content-between">
           <button
             routerLink="edit/images/{{ carDetail.carId }}"
             class="btn btn-sm btn-success shadow-sm"
           > Fotoğraf Güncelle </button>
-
           <button
             routerLink="edit/{{ carDetail.carId }}"
             class="btn btn-sm btn-primary shadow-sm"

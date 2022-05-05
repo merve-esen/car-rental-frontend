@@ -1,17 +1,17 @@
-<div
-  *ngIf="
-    dataLoaded && (carDetails | filterCarDetail: carFilterText).length == 0
-  "
-  class="alert alert-info w-100"
-  role="alert"
->
-  Kayıt bulunamadı
-</div>
-<div id="cars-list" class="row">
-  <app-loading-spinner *ngIf="!dataLoaded"></app-loading-spinner>
-  <app-car-card
-    *ngFor="let carDetail of carDetails | filterCarDetail: carFilterText"
-    [carDetail]="carDetail"
-    class="{{ class }} p-3 pt-0"
-  ></app-car-card>
+<div class="row">
+  <div class="col-md-3">
+    <app-side-bar></app-side-bar>
+  </div>
+  <div class="col-md-9">
+    <div *ngIf="
+        dataLoaded && (carDetails | filterCarDetail: carFilterText).length == 0
+      " class="alert alert-info w-100" role="alert">
+      Kayıt bulunamadı
+    </div>
+    <div id="cars-list" class="row">
+      <app-loading-spinner *ngIf="!dataLoaded"></app-loading-spinner>
+      <app-car-card *ngFor="let carDetail of carDetails | filterCarDetail: carFilterText" [carDetail]="carDetail"
+        class="{{ class }} p-3 pt-0"></app-car-card>
+    </div>
+  </div>
 </div>
