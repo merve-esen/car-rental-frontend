@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Brand } from 'src/app/models/brand';
 import { Color } from 'src/app/models/color';
@@ -22,7 +23,8 @@ export class CarAddComponent implements OnInit {
     private carService: CarService,
     private toastrService: ToastrService,
     private brandService: BrandService,
-    private colorService: ColorService
+    private colorService: ColorService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -59,6 +61,7 @@ export class CarAddComponent implements OnInit {
       this.carService.add(carModel).subscribe(
         (response) => {
           this.toastrService.success(response.message, 'Başarılı');
+          this.router.navigate(['', 'cars']);
         },
         (responseError) => {
           if(responseError.error.ValidationErrors){

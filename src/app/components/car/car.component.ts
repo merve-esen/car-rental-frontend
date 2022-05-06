@@ -1,14 +1,16 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CarDetail } from 'src/app/models/carDetail';
 import { CarService } from './../../services/car.service';
-//import { ToastrService } from 'ngx-toastr';
+import { CarImageService } from 'src/app/services/car-image.service';
+import { ToastrService } from 'ngx-toastr';
+import { Car } from 'src/app/models/car';
 
 @Component({
   selector: 'app-car',
   templateUrl: './car.component.html',
   styleUrls: ['./car.component.css'],
-  providers: [CarService]
+  providers: [CarService, CarImageService]
 })
 export class CarComponent implements OnInit {
   carDetails: CarDetail[] = [];
@@ -19,7 +21,10 @@ export class CarComponent implements OnInit {
 
   constructor(
     private carService: CarService,
-    private activatedRoute: ActivatedRoute
+    private carImageService: CarImageService,
+    private toastrService: ToastrService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -39,7 +44,20 @@ export class CarComponent implements OnInit {
     this.carService.getCarDetails().subscribe((response) => {
       this.carDetails = response.data;
       this.dataLoaded = true;
+      this.carDetails.forEach(carDetail => {
+        this.getCarImagesById(carDetail);
+      });
     });
+  }
+
+  getCarImagesById(carDetail: CarDetail) {
+    this.carImageService.getImagesByCarId(carDetail.carId).subscribe((response) => {
+      carDetail.carImageId = response.data[0].id;
+    });
+  }
+
+  getCarImageUrl(carImageId: number): string {
+    return this.carImageService.getCarImageUrl(carImageId);
   }
 
   getCarDetailsByBrand(brandName: string) {
@@ -63,5 +81,24 @@ export class CarComponent implements OnInit {
         this.carDetails = response.data;
         this.dataLoaded = true;
       });
+  }
+
+  delete(carDetail:CarDetail) {
+    if (window.confirm('Kaydı silmek istediğinize emin misiniz?')) this.deleteCar(carDetail);
+  }
+
+  deleteCar(carDetail:CarDetail) {
+    let carToDelete: Car = { id: carDetail.carId, brandId:0, colorId:0, dailyPrice:0, description:'', modelYear:0 };
+    this.carService.delete(carToDelete).subscribe((response) => {
+      this.toastrService.success(response.message);
+      this.getCarDetails();
+    },
+    (responseError) => {
+      console.log(responseError)
+        this.toastrService.error(
+          'Lütfen sistem yöneticisi ile iletişime geçin.',
+          'Hata'
+        );
+    });
   }
 }

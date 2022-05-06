@@ -102,7 +102,7 @@ export class CarEditComponent implements OnInit {
   }
 
   delete() {
-    if (window.confirm('Kaydı silmek istediğinize emin misiniz?')) this.deleteCarImages();
+    if (window.confirm('Kaydı silmek istediğinize emin misiniz?')) this.deleteCar();
   }
 
   deleteCar() {
@@ -112,18 +112,4 @@ export class CarEditComponent implements OnInit {
       this.router.navigate(['', 'cars']);
     });
   }
-
-  deleteCarImages() {
-    this.carImages.forEach((carImage, index) => {
-      if (carImage.id !== 0)
-        this.carImageService.delete(carImage).subscribe((response) => {
-          this.toastrService.success(
-            carImage.date.toString(),
-            response.message
-          );
-        });
-      if (index == this.carImages.length - 1) this.deleteCar();
-    });
-  }
-
 }
