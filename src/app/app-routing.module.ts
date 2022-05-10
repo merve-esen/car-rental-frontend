@@ -17,25 +17,26 @@ import { CarImageComponent } from './components/car-image/car-image.component';
 import { LoginComponent } from './components/login/login.component';
 import { LoginGuard } from './guards/login.guard';
 import { RegisterComponent } from './components/register/register.component';
+import { RoleGuard } from './guards/role.guard';
 
 const routes: Routes = [
   {path:"", pathMatch:"full", component:CarListComponent},
   {path:"car-list", pathMatch:"full", component:CarListComponent},
   {path:"cars", pathMatch:"full", component:CarComponent},
   {path:"car/:carId", pathMatch:"full", component:CarDetailComponent},
-  {path:"cars/edit/:id", component:CarEditComponent, canActivate: [LoginGuard]},
-  {path:"cars/edit/images/:carId", component:CarImageComponent, canActivate: [LoginGuard]},
+  {path:"cars/edit/:id", component:CarEditComponent, canActivate: [LoginGuard, RoleGuard], data: { expectedRole: 'admin' }},
+  {path:"cars/edit/images/:carId", component:CarImageComponent, canActivate: [LoginGuard, RoleGuard], data: { expectedRole: 'admin' }},
   {path:"cars/brand/:brandName", pathMatch:"full", component:CarComponent},
   {path:"cars/color/:colorName", pathMatch:"full", component:CarComponent},
   {path:"cars/brand/:brandName/color/:colorName", pathMatch:"full", component:CarComponent},
-  {path:"cars/add", component:CarAddComponent, canActivate: [LoginGuard]},
+  {path:"cars/add", component:CarAddComponent, canActivate: [LoginGuard, RoleGuard], data: { expectedRole: 'admin' }},
   {path:"brands", pathMatch:"full", component:BrandComponent},
-  {path:"brands/add", component:BrandAddComponent, canActivate: [LoginGuard]},
-  {path:"brands/edit/:id", component:BrandEditComponent, canActivate: [LoginGuard]},
+  {path:"brands/add", component:BrandAddComponent, canActivate: [LoginGuard, RoleGuard], data: { expectedRole: 'admin' }},
+  {path:"brands/edit/:id", component:BrandEditComponent, canActivate: [LoginGuard, RoleGuard], data: { expectedRole: 'admin' }},
   {path:"colors", pathMatch:"full", component:ColorComponent},
-  {path:"colors/add", component:ColorAddComponent, canActivate: [LoginGuard]},
-  {path:"colors/edit/:id", component:ColorEditComponent, canActivate: [LoginGuard]},
-  {path:"customers", component:CustomerComponent, canActivate: [LoginGuard]},
+  {path:"colors/add", component:ColorAddComponent, canActivate: [LoginGuard, RoleGuard], data: { expectedRole: 'admin' }},
+  {path:"colors/edit/:id", component:ColorEditComponent, canActivate: [LoginGuard, RoleGuard], data: { expectedRole: 'admin' }},
+  {path:"customers", component:CustomerComponent, canActivate: [LoginGuard, RoleGuard], data: { expectedRole: 'admin' }},
   {path:"rentals", component:RentalComponent, canActivate: [LoginGuard]},
   {path:"login", component:LoginComponent},
   {path:"register", component:RegisterComponent}
