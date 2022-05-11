@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 import { ColorService } from 'src/app/services/color.service';
 
 @Component({
@@ -12,7 +13,10 @@ import { ColorService } from 'src/app/services/color.service';
 export class ColorAddComponent implements OnInit {
 
   colorAddForm: FormGroup;
-  constructor(private formBuilder: FormBuilder, private colorService:ColorService, private toastrService:ToastrService) { }
+  constructor(private formBuilder: FormBuilder,
+    private colorService:ColorService,
+    private toastrService:ToastrService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.createColorAddForm();
@@ -29,11 +33,27 @@ export class ColorAddComponent implements OnInit {
       let colorModel = Object.assign({},this.colorAddForm.value)
       this.colorService.add(colorModel).subscribe(response=>{
         this.toastrService.success(response.message, "Başarılı")
-      },responseError=>{
-        if(responseError.error.ValidationErrors.length>0){
-          for (let i = 0; i <responseError.error.ValidationErrors.length; i++) {
-            this.toastrService.error(responseError.error.ValidationErrors[i].ErrorMessage, "Doğrulama hatası")
+        this.router.navigate(['', 'colors']);
+      },(responseError) => {
+        if(responseError.error.ValidationErrors){
+          if (responseError.error.ValidationErrors.length > 0) {
+            for (
+              let i = 0;
+              i < responseError.error.ValidationErrors.length;
+              i++
+            ) {
+              this.toastrService.error(
+                responseError.error.ValidationErrors[i].ErrorMessage,
+                'Doğrulama hatası'
+              );
+            }
           }
+        }
+        else {
+          this.toastrService.error(
+            'Lütfen sistem yöneticisi ile iletişime geçin.',
+            'Kayıt yapılamadı'
+          );
         }
       })
     }else{

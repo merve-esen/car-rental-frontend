@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Brand } from 'src/app/models/brand';
 import { BrandService } from 'src/app/services/brand.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-brand',
@@ -14,7 +15,8 @@ export class BrandComponent implements OnInit {
   //dosyasında "strictPropertyInitialization": false, eklediğimiz için gerek kalmadı.
   //filterText="";
 
-  constructor(private brandService: BrandService) {}
+  constructor(private brandService: BrandService,
+    private toastrService: ToastrService) {}
 
   ngOnInit(): void {
     this.getBrands();
@@ -26,27 +28,18 @@ export class BrandComponent implements OnInit {
     });
   }
 
-  /*setCurrentBrand(brand: Brand) {
-    this.currentBrand = brand;
-  }
-
-  resetCurrentBrand() {
-    this.currentBrand = {id:0, name:""};
-  }
-
-  getCurrentBrandClass(brand: Brand) {
-    if (brand == this.currentBrand) {
-      return 'list-group-item active';
-    } else {
-      return 'list-group-item';
+  delete(brand:Brand) {
+    if (window.confirm('Kaydı silmek istediğinize emin misiniz?')){
+      this.brandService.delete(brand).subscribe((response) => {
+        this.toastrService.success(response.message);
+        this.getBrands();
+      },
+      (responseError) => {
+          this.toastrService.error(
+            'Lütfen sistem yöneticisi ile iletişime geçin.',
+            'Hata'
+          );
+      });
     }
   }
-
-  getAllBrandClass() {
-    if (!this.currentBrand || this.currentBrand.id==0) {
-      return 'list-group-item active';
-    } else {
-      return 'list-group-item';
-    }
-  }*/
 }

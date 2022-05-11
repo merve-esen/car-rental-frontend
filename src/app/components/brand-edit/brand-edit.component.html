@@ -1,6 +1,6 @@
 <h1 class="display-6 fw-bold mb-3">Marka Güncelle</h1>
-<div class="card p-2 rounded-2 shadow-xl">
-  <div class="card-body shadow">
+<div class="card p-2 rounded-2">
+  <div class="card-body">
     <form *ngIf="brandEditForm" [formGroup]="brandEditForm">
       <div class="form-group mb-3">
         <label for="brand-name-input" class="fw-bold mb-3">Marka Adı</label>
@@ -16,12 +16,15 @@
       </div>
     </form>
   </div>
-  <div class="card-footer d-flex justify-content-between">
-    <button (click)="delete()" class="btn btn-danger btn-lg shadow-sm w-25">
-      Sil
+  <div class="card-footer d-flex justify-content-end">
+    <button (click)="update()" class="btn btn-success btn-lg">
+      <i class="bi bi-check-lg" title="Kaydet"></i> Kaydet
     </button>
-    <button (click)="update()" class="btn btn-primary btn-lg shadow-sm w-50">
-      Güncelle
+    <button (click)="delete()" class="btn btn-danger btn-lg mx-2">
+      <i class="bi bi-trash" title="Sil"></i> Sil
+    </button>
+    <button routerLink="/brands" class="btn btn-secondary btn-lg">
+      <i class="bi bi-arrow-left" title="İptal"></i> İptal
     </button>
   </div>
 </div>

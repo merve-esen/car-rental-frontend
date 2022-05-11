@@ -1,6 +1,7 @@
 import { ColorService } from './../../services/color.service';
 import { Component, OnInit } from '@angular/core';
 import { Color } from 'src/app/models/color';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-color',
@@ -13,7 +14,8 @@ export class ColorComponent implements OnInit {
   //currentColor: Color; // Normalde Color = {id:0, name:""} dememiz gerekiyordu ama tsconfig.ts
   //dosyasında "strictPropertyInitialization": false, eklediğimiz için gerek kalmadı.
 
-  constructor(private colorService: ColorService) {}
+  constructor(private colorService: ColorService,
+    private toastrService: ToastrService) {}
 
   ngOnInit(): void {
     this.getColors();
@@ -25,27 +27,18 @@ export class ColorComponent implements OnInit {
     });
   }
 
-  /*setCurrentColor(color: Color) {
-    this.currentColor = color;
-  }
-
-  resetCurrentColor() {
-    this.currentColor = {id:0, name:""};
-  }
-
-  getCurrentColorClass(color: Color) {
-    if (color == this.currentColor) {
-      return 'list-group-item active';
-    } else {
-      return 'list-group-item';
+  delete(color:Color) {
+    if (window.confirm('Kaydı silmek istediğinize emin misiniz?')){
+      this.colorService.delete(color).subscribe((response) => {
+        this.toastrService.success(response.message);
+        this.getColors();
+      },
+      (responseError) => {
+          this.toastrService.error(
+            'Lütfen sistem yöneticisi ile iletişime geçin.',
+            'Hata'
+          );
+      });
     }
   }
-
-  getAllColorClass() {
-    if (!this.currentColor || this.currentColor.id==0) {
-      return 'list-group-item active';
-    } else {
-      return 'list-group-item';
-    }
-  }*/
 }

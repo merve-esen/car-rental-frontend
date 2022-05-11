@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 import { BrandService } from 'src/app/services/brand.service';
 
 @Component({
@@ -12,7 +13,10 @@ import { BrandService } from 'src/app/services/brand.service';
 export class BrandAddComponent implements OnInit {
 
   brandAddForm: FormGroup;
-  constructor(private formBuilder: FormBuilder, private brandService:BrandService, private toastrService:ToastrService) { }
+  constructor(private formBuilder: FormBuilder,
+    private brandService:BrandService,
+    private toastrService:ToastrService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.createBrandAddForm();
@@ -29,11 +33,27 @@ export class BrandAddComponent implements OnInit {
       let brandModel = Object.assign({},this.brandAddForm.value)
       this.brandService.add(brandModel).subscribe(response=>{
         this.toastrService.success(response.message, "Başarılı")
-      },responseError=>{
-        if(responseError.error.ValidationErrors.length>0){
-          for (let i = 0; i <responseError.error.ValidationErrors.length; i++) {
-            this.toastrService.error(responseError.error.ValidationErrors[i].ErrorMessage, "Doğrulama hatası")
+        this.router.navigate(['', 'brands']);
+      },(responseError) => {
+        if(responseError.error.ValidationErrors){
+          if (responseError.error.ValidationErrors.length > 0) {
+            for (
+              let i = 0;
+              i < responseError.error.ValidationErrors.length;
+              i++
+            ) {
+              this.toastrService.error(
+                responseError.error.ValidationErrors[i].ErrorMessage,
+                'Doğrulama hatası'
+              );
+            }
           }
+        }
+        else {
+          this.toastrService.error(
+            'Lütfen sistem yöneticisi ile iletişime geçin.',
+            'Kayıt yapılamadı'
+          );
         }
       })
     }else{
