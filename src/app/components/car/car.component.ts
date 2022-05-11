@@ -94,7 +94,6 @@ export class CarComponent implements OnInit {
       this.getCarDetails();
     },
     (responseError) => {
-      console.log(responseError)
         this.toastrService.error(
           'Lütfen sistem yöneticisi ile iletişime geçin.',
           'Hata'

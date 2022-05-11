@@ -1,6 +1,6 @@
 <div class="d-flex justify-content-between">
   <h1 class="display-6 fw-bold mb-3">Araba Güncelle</h1>
-  <button *ngIf="car" routerLink="/cars/edit/images/{{ car.id }}" class="btn btn-lg btn-success mb-3">
+  <button *ngIf="car" routerLink="/cars/edit/images/{{ car.id }}" class="btn btn-lg btn-primary mb-3">
     <i class="bi bi-images" title="Fotoğraflar"></i>
   </button>
 </div>
@@ -53,11 +53,14 @@
     </form>
   </div>
   <div class="card-footer d-flex justify-content-end">
-    <button (click)="delete()" class="btn btn-danger btn-lg">
+    <button (click)="update()" class="btn btn-success btn-lg">
+      <i class="bi bi-check-lg" title="Kaydet"></i> Kaydet
+    </button>
+    <button (click)="delete()" class="btn btn-danger btn-lg mx-2">
       <i class="bi bi-trash" title="Sil"></i> Sil
     </button>
-    <button (click)="update()" class="btn btn-primary btn-lg">
-      <i class="bi bi-check-lg" title="Kaydet"></i> Kaydet
+    <button routerLink="/cars" class="btn btn-secondary btn-lg">
+      <i class="bi bi-arrow-left" title="Kaydet"></i> İptal
     </button>
   </div>
 </div>
