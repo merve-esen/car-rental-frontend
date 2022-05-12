@@ -57,6 +57,27 @@ export class BrandEditComponent implements OnInit {
     this.brandService.update(brandModule).subscribe((response) => {
       this.toastrService.success(response.message);
       this.router.navigate(['', 'brands']);
+    },(responseError) => {
+      if(responseError.error.ValidationErrors){
+        if (responseError.error.ValidationErrors.length > 0) {
+          for (
+            let i = 0;
+            i < responseError.error.ValidationErrors.length;
+            i++
+          ) {
+            this.toastrService.error(
+              responseError.error.ValidationErrors[i].ErrorMessage,
+              'Doğrulama hatası'
+            );
+          }
+        }
+      }
+      else {
+        this.toastrService.error(
+          'Lütfen sistem yöneticisi ile iletişime geçin.',
+          'Kayıt yapılamadı'
+        );
+      }
     });
   }
 

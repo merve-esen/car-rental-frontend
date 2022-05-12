@@ -5,11 +5,11 @@
       <div class="card-body">
         <form [formGroup]="brandAddForm">
           <div class="mb-3">
-            <label for="brandName">Marka Adı</label>
-            <div class="form-group">
+            <div class="form-group form-floating">
               <input type="text" id="brandName" formControlName="name"
                 class="form-control" placeholder="Marka Adı"
               />
+              <label for="brandName">Marka Adı</label>
               <div *ngIf="brandAddForm.get('name')?.hasError('required') && brandAddForm.get('name')?.dirty"
                 class="alert alert-danger">Marka adı gereklidir</div>
             </div>

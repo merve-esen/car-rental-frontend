@@ -2,8 +2,7 @@
 <div class="card p-2 rounded-2">
   <div class="card-body">
     <form *ngIf="brandEditForm" [formGroup]="brandEditForm">
-      <div class="form-group mb-3">
-        <label for="brand-name-input" class="fw-bold mb-3">Marka Adı</label>
+      <div class="form-group form-floating mb-3">
         <input
           type="text"
           id="brand-name-input"
@@ -11,6 +10,7 @@
           class="form-control"
           placeholder="Marka Adı"
         />
+        <label for="brand-name-input" class="fw-bold mb-3">Marka Adı</label>
         <div *ngIf="brandEditForm.get('name')?.hasError('required') && brandEditForm.get('name')?.dirty"
                 class="alert alert-danger">Marka adı gereklidir</div>
       </div>

@@ -38,8 +38,8 @@ const routes: Routes = [
   {path:"colors/edit/:id", component:ColorEditComponent, canActivate: [LoginGuard, RoleGuard], data: { expectedRole: 'admin' }},
   {path:"customers", component:CustomerComponent, canActivate: [LoginGuard, RoleGuard], data: { expectedRole: 'admin' }},
   {path:"rentals", component:RentalComponent, canActivate: [LoginGuard]},
-  {path:"login", component:LoginComponent},
-  {path:"register", component:RegisterComponent}
+  {path:"login", component:LoginComponent, canActivate: [LoginGuard]},
+  {path:"register", component:RegisterComponent, canActivate: [LoginGuard]}
 ];
 
 @NgModule({

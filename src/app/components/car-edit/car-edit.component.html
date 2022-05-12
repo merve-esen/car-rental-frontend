@@ -7,31 +7,31 @@
 <div class="card p-2 rounded-2">
   <div class="card-body">
     <form *ngIf="carEditForm" [formGroup]="carEditForm">
-      <div class="form-group mb-3">
+      <div class="form-group form-floating mb-3">
+        <select class="form-select" formControlName="brandId">
+          <option *ngFor="let brand of brands" value="{{ brand.id }}">
+            {{ brand.name }}
+          </option>
+        </select>
         <label for="brand-input" class="fw-bold mb-3">Marka</label>
-          <select class="form-select" formControlName="brandId">
-            <option *ngFor="let brand of brands" value="{{ brand.id }}">
-              {{ brand.name }}
-            </option>
-          </select>
       </div>
-      <div class="form-group mb-3">
-        <label for="color-input" class="fw-bold mb-3">Renk</label>
+      <div class="form-group form-floating mb-3">
         <select id="color-input" formControlName="colorId" class="form-select">
           <option *ngFor="let color of colors" value="{{ color.id }}">
             {{ color.name }}
           </option>
         </select>
+        <label for="color-input" class="fw-bold mb-3">Renk</label>
       </div>
-      <div class="form-group mb-3">
-        <label for="description-input" class="fw-bold mb-3">Model Adı / Açıklama</label>
+      <div class="form-group form-floating mb-3">
         <input type="text" formControlName="description" id="description-input" class="form-control"
           placeholder="Model Adı / Açıklama"/>
+        <label for="description-input" class="fw-bold mb-3">Model Adı / Açıklama</label>
       </div>
-      <div class="form-group mb-3">
-        <label for="model-year-input" class="fw-bold mb-3">Model Yılı</label>
+      <div class="form-group form-floating mb-3">
         <input type="number" formControlName="modelYear" id="model-year-input" class="form-control"
           placeholder="Model Year" />
+        <label for="model-year-input" class="fw-bold mb-3">Model Yılı</label>
         <div *ngIf="
             carEditForm.get('modelYear')?.hasError('required') &&
             carEditForm.get('modelYear')?.dirty
@@ -39,10 +39,10 @@
           Model yılı gereklidir
         </div>
       </div>
-      <div class="form-group mb-3">
-        <label for="daily-price-input" class="fw-bold mb-3">Günlük Fiyat</label>
+      <div class="form-group form-floating mb-3">
         <input type="number" formControlName="dailyPrice" id="daily-price-input" class="form-control"
           placeholder="Daily Price" />
+        <label for="daily-price-input" class="fw-bold mb-3">Günlük Fiyat</label>
         <div *ngIf="
             carEditForm.get('dailyPrice')?.hasError('required') &&
             carEditForm.get('dailyPrice')?.dirty

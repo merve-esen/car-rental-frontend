@@ -52,7 +52,23 @@ export class RegisterComponent implements OnInit {
         this.router.navigate([""]);
         this.toastrService.success("Kayıt başarılı");
       }, responseError=>{
-        this.toastrService.error(responseError.error)
+        if(responseError.error.ValidationErrors){
+          if (responseError.error.ValidationErrors.length > 0) {
+            for (
+              let i = 0;
+              i < responseError.error.ValidationErrors.length;
+              i++
+            ) {
+              this.toastrService.error(
+                responseError.error.ValidationErrors[i].ErrorMessage,
+                'Doğrulama hatası'
+              );
+            }
+          }
+        }
+        else {
+          this.toastrService.error(responseError.error);
+        }
       })
     }
     else{

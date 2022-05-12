@@ -6,59 +6,53 @@
       </div>
       <div class="card-body">
         <form [formGroup]="carAddForm">
-          <div class="mb-3">
-            <label for="brands">Marka</label>
+          <div class="form-floating mb-3">
             <select class="form-select" id="brands" formControlName="brandId">
               <option *ngFor="let brand of brands" [ngValue]="brand.id">
                 {{ brand.name }}
               </option>
             </select>
+            <label for="brands">Marka</label>
           </div>
-          <div class="mb-3">
-            <label for="colors">Renk</label>
+          <div class="form-floating mb-3">
             <select class="form-select" id="colors" formControlName="colorId">
               <option *ngFor="let color of colors" [ngValue]="color.id">
                  {{ color.name }}
               </option>
            </select>
+           <label for="colors">Renk</label>
           </div>
-          <div class="mb-3">
-            <label for="description">Model Adı / Açıklama</label>
-            <div class="form-group">
-              <input type="text" id="description" formControlName="description" class="form-control"
-                placeholder="Model Adı / Açıklama" />
-              <div *ngIf="
-                  carAddForm.get('description')?.hasError('required') &&
-                  carAddForm.get('description')?.dirty
-                " class="alert alert-danger">
-                Model adı / açıklama gereklidir
-              </div>
+          <div class="form-group form-floating mb-3">
+            <input type="text" id="description" formControlName="description" class="form-control"
+              placeholder="Model Adı / Açıklama" />
+              <label for="description">Model Adı / Açıklama</label>
+            <div *ngIf="
+                carAddForm.get('description')?.hasError('required') &&
+                carAddForm.get('description')?.dirty
+              " class="alert alert-danger">
+              Model adı / açıklama gereklidir
             </div>
           </div>
-          <div class="mb-3">
-            <label for="modelYear">Model Yılı</label>
-            <div class="form-group">
-              <input type="number" id="modelYear" formControlName="modelYear" class="form-control"
-                placeholder="Model Yılı" />
-              <div *ngIf="
-                  carAddForm.get('modelYear')?.hasError('required') &&
-                  carAddForm.get('modelYear')?.dirty
-                " class="alert alert-danger">
-                Model yılı gereklidir
-              </div>
+          <div class="form-group form-floating mb-3">
+            <input type="number" id="modelYear" formControlName="modelYear" class="form-control"
+              placeholder="Model Yılı" />
+              <label for="modelYear">Model Yılı</label>
+            <div *ngIf="
+                carAddForm.get('modelYear')?.hasError('required') &&
+                carAddForm.get('modelYear')?.dirty
+              " class="alert alert-danger">
+              Model yılı gereklidir
             </div>
           </div>
-          <div class="mb-3">
-            <label for="dailyPrice">Günlük Fiyat</label>
-            <div class="form-group">
-              <input type="number" id="dailyPrice" formControlName="dailyPrice" class="form-control"
-                placeholder="Günlük Fiyat" />
-              <div *ngIf="
-                  carAddForm.get('dailyPrice')?.hasError('required') &&
-                  carAddForm.get('dailyPrice')?.dirty
-                " class="alert alert-danger">
-                Günlük fiyat gereklidir
-              </div>
+          <div class="form-group form-floating mb-3">
+            <input type="number" id="dailyPrice" formControlName="dailyPrice" class="form-control"
+              placeholder="Günlük Fiyat" />
+              <label for="dailyPrice">Günlük Fiyat</label>
+            <div *ngIf="
+                carAddForm.get('dailyPrice')?.hasError('required') &&
+                carAddForm.get('dailyPrice')?.dirty
+              " class="alert alert-danger">
+              Günlük fiyat gereklidir
             </div>
           </div>
         </form>

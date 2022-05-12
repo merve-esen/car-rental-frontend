@@ -45,11 +45,27 @@ export class LoginComponent implements OnInit {
         if (this.rememberMe) {
           this.saveEmail(loginModel.email);
         }
-        this.router.navigate([""]);
         this.toastrService.info("Giriş yapıldı")
+        this.router.navigate(['/']);
       }, responseError=>{
         this.authService.isLoggedIn = false;
-        this.toastrService.error(responseError.error)
+        if(responseError.error.ValidationErrors){
+          if (responseError.error.ValidationErrors.length > 0) {
+            for (
+              let i = 0;
+              i < responseError.error.ValidationErrors.length;
+              i++
+            ) {
+              this.toastrService.error(
+                responseError.error.ValidationErrors[i].ErrorMessage,
+                'Doğrulama hatası'
+              );
+            }
+          }
+        }
+        else {
+          this.toastrService.error(responseError.error);
+        }
       })
     }
     else{

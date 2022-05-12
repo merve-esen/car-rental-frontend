@@ -98,6 +98,27 @@ export class CarEditComponent implements OnInit {
     this.carService.update(carModule).subscribe((response) => {
       this.toastrService.success(response.message);
       this.router.navigate(['', 'cars']);
+    },(responseError) => {
+      if(responseError.error.ValidationErrors){
+        if (responseError.error.ValidationErrors.length > 0) {
+          for (
+            let i = 0;
+            i < responseError.error.ValidationErrors.length;
+            i++
+          ) {
+            this.toastrService.error(
+              responseError.error.ValidationErrors[i].ErrorMessage,
+              'Doğrulama hatası'
+            );
+          }
+        }
+      }
+      else {
+        this.toastrService.error(
+          'Lütfen sistem yöneticisi ile iletişime geçin.',
+          'Kayıt yapılamadı'
+        );
+      }
     });
   }
 
