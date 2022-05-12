@@ -1,8 +1,9 @@
-import { ToastrService } from 'ngx-toastr';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { AuthService } from 'src/app/services/auth.service';
+import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 @Component({
   selector: 'app-login',
@@ -11,17 +12,25 @@ import { Router } from '@angular/router';
   providers: [AuthService]
 })
 export class LoginComponent implements OnInit {
-
   loginForm: FormGroup;
-  constructor(private formBuilder: FormBuilder, private authService: AuthService, private toastrService: ToastrService, private router: Router) { }
+  rememberMe: boolean = false;
+  rememberedEmail: any;
+
+  constructor(private formBuilder: FormBuilder,
+    private authService: AuthService,
+    private toastrService: ToastrService,
+    private localStorageService: LocalStorageService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.createLoginForm();
+    this.checkRememberedUser();
+    this.autoFillEmail();
   }
 
   createLoginForm(){
     this.loginForm = this.formBuilder.group({
-      email: ["", Validators.required],
+      email: ["", [Validators.required, Validators.email]],
       password: ["", Validators.required]
     })
   }
@@ -31,13 +40,47 @@ export class LoginComponent implements OnInit {
       let loginModel = Object.assign({}, this.loginForm.value)
 
       this.authService.login(loginModel).subscribe(response=>{
-        localStorage.setItem("token", response.data.token)
-        this.toastrService.info("Giriş başarılı")
-        this.router.navigate(['', 'car-list']);
+        this.localStorageService.add("token", response.data.token);
+        this.authService.isLoggedIn = true;
+        if (this.rememberMe) {
+          this.saveEmail(loginModel.email);
+        }
+        this.router.navigate([""]);
+        this.toastrService.info("Giriş yapıldı")
       }, responseError=>{
+        this.authService.isLoggedIn = false;
         this.toastrService.error(responseError.error)
       })
     }
+    else{
+      this.toastrService.warning('Lütfen bilgilerinizi kontrol ediniz', 'Dikkat');
+      return;
+    }
   }
 
+  autoFillEmail() {
+    if (this.rememberedEmail) {
+      let email = this.localStorageService.getItem("remember");
+      if (email != null) {
+        this.loginForm.get("email")?.setValue(email);
+      }
+    }
+  }
+
+  deleteRememberedEmail() {
+    this.localStorageService.remove("remember");
+  }
+
+  checkRememberedUser() {
+    let result = this.localStorageService.getItem("remember");
+    if (result != null) {
+      this.rememberedEmail = result;
+    } else {
+      this.rememberedEmail = undefined;
+    }
+  }
+
+  saveEmail(email: string) {
+    this.localStorageService.add("remember", email);
+  }
 }

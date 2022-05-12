@@ -31,7 +31,7 @@ export class NaviComponent implements OnInit {
   logOut() {
     this.authService.logOut();
     this.router.navigate([""])
-    this.toastrService.success("Hesabınızdan çıkış yapıldı", "Çıkış yapıldı");
+    this.toastrService.success("", "Çıkış yapıldı");
   }
 
   checkifAdmin() {

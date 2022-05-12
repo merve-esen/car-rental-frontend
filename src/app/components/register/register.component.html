@@ -1,56 +1,42 @@
 <body class="text-center">
-  <main class="form-signin">
+  <main class="form-signup">
     <form [formGroup]="registerForm">
       <h1 class="h3 mb-3 fw-normal">Kayıt Ol</h1>
-      <div class="form-floating">
-        <input
-          formControlName="firstName"
-          type="text"
-          class="form-control"
-          id="floatingInput"
-          placeholder="İsim"
-        />
-        <label for="floatingInput">İsim</label>
+      <div class="form-floating mb-2">
+        <input formControlName="firstName" type="text" class="form-control" id="signupFirstName" placeholder="İsim" />
+        <label for="signupFirstName">İsim</label>
       </div>
-      <div class="form-floating">
-        <input
-          formControlName="lastName"
-          type="text"
-          class="form-control"
-          id="floatingInput"
-          placeholder="Soyisim"
-        />
-        <label for="floatingInput">Soyisim</label>
+      <div class="form-floating mb-2">
+        <input formControlName="lastName" type="text" class="form-control" id="signupLastName" placeholder="Soyisim" />
+        <label for="signupLastName">Soyisim</label>
       </div>
-      <div class="form-floating">
-        <input
-          formControlName="email"
-          type="email"
-          class="form-control"
-          id="floatingInput"
-          placeholder="name@example.com"
-        />
-        <label for="floatingInput">E-posta</label>
+      <div class="form-floating mb-2">
+        <input formControlName="email" type="email" class="form-control" id="signupEmail"
+          placeholder="name@example.com" />
+        <label for="signupEmail">E-posta</label>
       </div>
-      <div class="form-floating">
-        <input
-          formControlName="password"
-          type="password"
-          class="form-control"
-          id="floatingPassword"
-          placeholder="Password"
-        />
-        <label for="floatingPassword">Parola</label>
+      <div class="form-floating mb-2">
+        <input formControlName="password" type="password" class="form-control" id="signupPassword"
+          placeholder="Password" />
+        <label for="signupPassword">Parola</label>
+      </div>
+      <div class="form-floating mb-2">
+        <input formControlName="confirmPassword" type="password" class="form-control" id="signupconfirmpassword"
+          placeholder="Parola tekrar">
+        <label for="signupconfirmpassword">Parola tekrar</label>
       </div>
       <div class="checkbox mb-3">
         <label>
-          <input type="checkbox" value="remember-me" /> Bilgilerimi hatırla
-        </label>
+          <input type="checkbox" value="remember-me" [(ngModel)]="rememberMe"
+            [ngModelOptions]="{standalone: true}"> E-postamı hatırla
+          </label>
       </div>
       <button class="w-100 btn btn-lg btn-primary" (click)="register()">
         Kayıt Ol
       </button>
-      <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
+      <div class="text-dark mt-3" style="font-size:14px">Zaten bir hesabın var mı?
+        <a routerLink="/login" style="color: #0d6efd;">Hemen giriş yap!</a>
+      </div>
     </form>
   </main>
 </body>

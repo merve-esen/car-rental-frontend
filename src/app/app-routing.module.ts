@@ -15,8 +15,8 @@ import { CarDetailComponent } from './components/car-detail/car-detail.component
 import { CarAddComponent } from './components/car-add/car-add.component';
 import { CarImageComponent } from './components/car-image/car-image.component';
 import { LoginComponent } from './components/login/login.component';
-import { LoginGuard } from './guards/login.guard';
 import { RegisterComponent } from './components/register/register.component';
+import { LoginGuard } from './guards/login.guard';
 import { RoleGuard } from './guards/role.guard';
 
 const routes: Routes = [

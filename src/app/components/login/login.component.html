@@ -2,35 +2,42 @@
   <main class="form-signin">
     <form [formGroup]="loginForm">
       <h1 class="h3 mb-3 fw-normal">Giriş yap</h1>
-      <div class="form-floating">
-        <input
-          formControlName="email"
-          type="email"
-          class="form-control"
-          id="floatingInput"
-          placeholder="name@example.com"
-        />
-        <label for="floatingInput">E-posta</label>
+      <div *ngIf="rememberedEmail">
+        <div *ngIf="rememberedEmail != null">
+          <h5 class="mb-4 fw-normal text-dark">
+            Hoşgeldiniz
+            <span class="text-primary" style="text-transform: none"><span>{{ rememberedEmail }}</span></span>
+          </h5>
+        </div>
       </div>
-      <div class="form-floating">
-        <input
-          formControlName="password"
-          type="password"
-          class="form-control"
-          id="floatingPassword"
-          placeholder="Password"
-        />
-        <label for="floatingPassword">Parola</label>
+      <div *ngIf="!rememberedEmail">
+        <div class="form-floating mb-2">
+          <input formControlName="email" type="email" class="form-control" id="signinEmail"
+            placeholder="name@example.com" />
+          <label for="signinEmail">E-posta adresi</label>
+        </div>
+      </div>
+      <div class="form-floating mb-2">
+        <input formControlName="password" type="password" class="form-control" id="signinPassword"
+          placeholder="Password" />
+        <label for="signinPassword">Parola</label>
       </div>
       <div class="checkbox mb-3">
-        <label>
-          <input type="checkbox" value="remember-me" /> Bilgilerimi hatırla
+        <label *ngIf="!rememberedEmail">
+          <input type="checkbox" value="remember-me" [(ngModel)]="rememberMe"
+              [ngModelOptions]="{standalone: true}"> E-postamı hatırla
         </label>
+        <a style="color: black;" *ngIf="rememberedEmail" (click)="deleteRememberedEmail()"
+            href="login">Farklı bir hesapla oturum aç</a>
       </div>
       <button class="w-100 btn btn-lg btn-primary" (click)="login()">
         Giriş yap
       </button>
-      <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
+      <div class="text-dark mt-3" style="font-size:14px">
+        Henüz kayıt olmadın mı? <a routerLink="/register"
+            style="color: #0d6efd;">Hemen
+            üye ol!</a>
+      </div>
     </form>
   </main>
 </body>
