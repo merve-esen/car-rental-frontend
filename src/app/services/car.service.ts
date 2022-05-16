@@ -30,6 +30,11 @@ export class CarService {
     return this.httpClient.get<SingleResponseModel<Car>>(path);
   }
 
+  getCarDetailByCarId(carId: number):Observable<SingleResponseModel<CarDetail>> {
+    let path = `${this.apiControllerUrl}/getcardetailbycarid?carId=${carId}`
+    return this.httpClient.get<SingleResponseModel<CarDetail>>(path);
+  }
+
   getCarsByBrand(brandName: string):Observable<ListResponseModel<CarDetail>> {
     let path = `${this.apiControllerUrl}/getcarsbybrand?brandName=${brandName}`
     return this.httpClient.get<ListResponseModel<CarDetail>>(path);

@@ -15,6 +15,12 @@ export class AuthService {
   apiControllerUrl = `${environment.apiUrl}/auth`;
   private loggedIn = new BehaviorSubject<boolean>(this.isTokenExpired()); //https://loiane.com/2017/08/angular-hide-navbar-login-page/
 
+  constructor(
+    private httpClient: HttpClient,
+    private localStorageService: LocalStorageService,
+    private jwtHelperService: JwtHelperService
+  ) {}
+
   public get loginStatus() {
     return this.loggedIn.asObservable();
   }
@@ -26,12 +32,6 @@ export class AuthService {
   public set isLoggedIn(status: boolean) {
     this.loggedIn.next(status);
   }
-
-  constructor(
-    private httpClient: HttpClient,
-    private localStorageService: LocalStorageService,
-    private jwtHelperService: JwtHelperService
-  ) {}
 
   login(loginModel: LoginModel): Observable<SingleResponseModel<TokenModel>> {
     let path = `${this.apiControllerUrl}/login`;

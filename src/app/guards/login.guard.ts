@@ -16,7 +16,7 @@ export class LoginGuard implements CanActivate {
     if (this.authService.isLoggedIn) {
       if (route.routeConfig?.path === "login" || route.routeConfig?.path === "register") {
         this.router.navigate([""]);
-        this.toastrService.warning("Sisteme zaten giriş yapılmış", "Giriş yapılmış");
+        this.toastrService.warning("Sisteme zaten giriş yapılmış");
         return false;
       } else {
         return true;
@@ -27,7 +27,7 @@ export class LoginGuard implements CanActivate {
       } else {
         this.authService.logOut();
         this.router.navigate(["login"]);
-        this.toastrService.error("Sisteme giriş yapmalısınız", "Giriş yapmalısınz");
+        this.toastrService.error("Sisteme giriş yapmalısınız");
         return false;
       }
     }

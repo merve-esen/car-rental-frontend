@@ -1,70 +1,46 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { Brand } from 'src/app/models/brand';
-import { Car } from 'src/app/models/car';
+import { Observable } from 'rxjs';
+import { CarDetail } from 'src/app/models/carDetail';
 import { CarImage } from 'src/app/models/carImage';
-import { Color } from 'src/app/models/color';
-import { Rental } from 'src/app/models/rental';
-import { BrandService } from 'src/app/services/brand.service';
-import { CarImageService } from 'src/app/services/car-image.service';
 import { CarService } from 'src/app/services/car.service';
-import { ColorService } from 'src/app/services/color.service';
-import { RentalService } from 'src/app/services/rental.service';
+import { CarImageService } from 'src/app/services/car-image.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-car-detail',
   templateUrl: './car-detail.component.html',
   styleUrls: ['./car-detail.component.css'],
-  providers: [BrandService, CarImageService, CarService, ColorService, RentalService]
+  providers: [CarService, CarImageService]
 })
 export class CarDetailComponent implements OnInit {
 
-  car!: Car;
-  brand!: Brand;
-  color!: Color;
+  carDetail: CarDetail;
   carImages!: CarImage[];
-  DateTimeNow: Date = new Date();
-  rentDate: Date = this.DateTimeNow;
-  returnDate: Date = this.DateTimeNow;
+  isLoggedIn: Observable<boolean>;
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private brandService: BrandService,
     private carService: CarService,
-    private colorService: ColorService,
     private carImageService: CarImageService,
-    private rentalService: RentalService,
+    private authService: AuthService,
     private toastr: ToastrService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
+    this.isLoggedIn = this.authService.loginStatus;
     this.activatedRoute.params.subscribe((params) => {
-      this.getCarById(params['carId']);
+      this.getCarDetailByCarId(params['carId']);
     });
   }
 
-  getCarById(carId: number) {
-    this.carService.getById(carId).subscribe((response) => {
-      this.car = response.data;
-
-      this.getBrandById(this.car.brandId);
-      this.getColorById(this.car.colorId);
-      this.getCarImagesById(this.car.id);
+  getCarDetailByCarId(carId: number) {
+    this.carService.getCarDetailByCarId(carId).subscribe((response) => {
+      this.carDetail = response.data;
+      this.getCarImagesById(this.carDetail.carId);
     });
-  }
-
-  getBrandById(brandId: number) {
-    this.brandService
-      .getById(brandId)
-      .subscribe((response) => (this.brand = response.data));
-  }
-
-  getColorById(colorId: number) {
-    this.colorService
-      .getById(colorId)
-      .subscribe((response) => (this.color = response.data));
   }
 
   getCarImagesById(carId: number) {
@@ -73,7 +49,7 @@ export class CarDetailComponent implements OnInit {
       .subscribe((response) => (this.carImages = response.data));
   }
 
-  rentCar() {
+  /*rentCar() {
     let rental: Rental = {
       carId: this.car.id,
       customerId: 1, //TODO
@@ -85,7 +61,7 @@ export class CarDetailComponent implements OnInit {
       this.toastr.info('Ödeme sayfasına yönlendiriliyorsunuz.');
         this.router.navigateByUrl('/checkout');
     });
-  }
+  }*/
 
   isActiveCarousel(carImageIndex: number): string {
     return carImageIndex == 0 ? 'active' : '';
