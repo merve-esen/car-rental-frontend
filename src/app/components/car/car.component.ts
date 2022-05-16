@@ -88,7 +88,7 @@ export class CarComponent implements OnInit {
   }
 
   deleteCar(carDetail:CarDetail) {
-    let carToDelete: Car = { id: carDetail.carId, brandId:0, colorId:0, dailyPrice:0, description:'', modelYear:0 };
+    let carToDelete: Car = { id: carDetail.carId, brandId:0, colorId:0, dailyPrice:0, description:'', modelYear:0, minFindexScore:0 };
     this.carService.delete(carToDelete).subscribe((response) => {
       this.toastrService.success(response.message);
       this.getCarDetails();
