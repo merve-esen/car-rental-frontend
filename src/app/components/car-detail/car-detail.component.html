@@ -40,6 +40,9 @@
       <li>
         <h5><b>Günlük Ücret: </b>{{ carDetail.dailyPrice | currency:"":"" }}₺</h5>
       </li>
+      <li>
+        <h5><b>Findex Puanı: </b>{{ carDetail.minFindexScore }}</h5>
+      </li>
     </ul>
     <div *ngIf="isLoggedIn | async">
       <app-car-rent></app-car-rent>
