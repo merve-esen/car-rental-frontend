@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { LoginGuard } from './guards/login.guard';
+import { RoleGuard } from './guards/role.guard';
 import { CarEditComponent } from './components/car-edit/car-edit.component';
 import { CarListComponent } from './components/car-list/car-list.component';
 import { ColorEditComponent } from './components/color-edit/color-edit.component';
@@ -16,8 +18,7 @@ import { CarAddComponent } from './components/car-add/car-add.component';
 import { CarImageComponent } from './components/car-image/car-image.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
-import { LoginGuard } from './guards/login.guard';
-import { RoleGuard } from './guards/role.guard';
+import { PaymentComponent } from './components/payment/payment.component';
 
 const routes: Routes = [
   {path:"", pathMatch:"full", component:CarListComponent},
@@ -39,7 +40,8 @@ const routes: Routes = [
   {path:"customers", component:CustomerComponent, canActivate: [LoginGuard, RoleGuard], data: { expectedRole: 'admin' }},
   {path:"rentals", component:RentalComponent, canActivate: [LoginGuard]},
   {path:"login", component:LoginComponent, canActivate: [LoginGuard]},
-  {path:"register", component:RegisterComponent, canActivate: [LoginGuard]}
+  {path:"register", component:RegisterComponent, canActivate: [LoginGuard]},
+  {path:"payment/:carId", component:PaymentComponent, canActivate: [LoginGuard]}
 ];
 
 @NgModule({

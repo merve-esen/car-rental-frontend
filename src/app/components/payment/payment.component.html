@@ -1,0 +1,170 @@
+<div class="row">
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-header fw-bold">
+        <i class="bi-credit-card me-1"></i> Kart bilgilerinizi doldurun
+      </div>
+      <div class="card-body">
+        <form [formGroup]="paymentForm" (ngSubmit)="add()">
+          <!--cardHolderFullName input-->
+          <div class="mt-3 form-floating">
+            <input oninput="this.value = this.value.toLocaleUpperCase()" type="text" id="cardHolderFullName"
+              formControlName="cardHolderFullName" placeholder="Kart üzerindeki isim" class="form-control" minlength="5"
+              maxlength="25" />
+            <label for="cardHolderFullName">Kart üzerindeki isim</label>
+          </div>
+          <!--cardHolderFullName input end-->
+
+          <!--cardHolderFullName validator info-->
+          <div *ngIf="paymentForm.get('cardHolderFullName')?.invalid &&
+                paymentForm.get('cardHolderFullName')?.errors &&
+                (paymentForm.get('cardHolderFullName')?.dirty ||
+                paymentForm.get('cardHolderFullName')?.touched)">
+            <small class="text-danger" *ngIf="paymentForm.get('cardHolderFullName')?.hasError('required')">
+              Bu alan boş olamaz!
+            </small>
+            <small class="text-danger" *ngIf="paymentForm.get('cardHolderFullName')?.hasError('minlength')">
+              Bu alana en az 5 karakter girilmelidir!
+            </small>
+            <small class="text-danger" *ngIf="paymentForm.get('cardHolderFullName')?.hasError('maxlength')">
+              Bu alana en fazla 50 karakter girilebilir!
+            </small>
+          </div>
+          <!--cardHolderFullName validator info end-->
+
+          <!--cardNumber input-->
+          <div class="mt-3 mr-2 form-floating">
+            <input type="text" id="cardNumber" formControlName="cardNumber" placeholder="Kart numarası"
+              class="form-control" mask='0000 0000 0000 0000' minlength="16" maxlength="19" />
+            <label for="cardNumber">Kart numarası</label>
+          </div>
+          <!--cardNumber input end-->
+
+          <!--cardNumber validator info-->
+          <div *ngIf="paymentForm.get('cardNumber')?.invalid &&
+                paymentForm.get('cardNumber')?.errors &&
+                (paymentForm.get('cardNumber')?.dirty ||
+                paymentForm.get('cardNumber')?.touched)">
+            <small class="text-danger" *ngIf="paymentForm.get('cardNumber')?.hasError('required')">
+              Bu alan boş olamaz!
+            </small>
+            <small class="text-danger" *ngIf="paymentForm.get('cardNumber')?.hasError('minlength')">
+              Bu alana 16 karakter girilmelidir!
+            </small>
+            <small class="text-danger" *ngIf="paymentForm.get('cardNumber')?.hasError('maxlength')">
+              Bu alana 16 karakter girilmelidir!
+            </small>
+          </div>
+          <!--cardNumber validator info end-->
+
+          <div class="row d-flex flex-row form-floating">
+            <div class="col-md-4">
+
+              <!--expireMonth input-->
+              <div class="mt-3 mr-2 form-floating">
+                <input type="text" id="expireMonth" formControlName="expireMonth" placeholder="Ay" class="form-control"
+                  mask='00' minlength="2" maxlength="2" />
+                <label for="expireMonth">Ay</label>
+              </div>
+              <!--expireMonth input end-->
+
+              <!--expireMonth validator info-->
+              <div *ngIf="paymentForm.get('expireMonth')?.invalid &&
+                        paymentForm.get('expireMonth')?.errors &&
+                        (paymentForm.get('expireMonth')?.dirty ||
+                        paymentForm.get('expireMonth')?.touched)">
+                <small class="text-danger" *ngIf="paymentForm.get('expireMonth')?.hasError('required')">
+                  Bu alan boş olamaz!
+                </small>
+                <small class="text-danger" *ngIf="paymentForm.get('expireMonth')?.hasError('minlength')">
+                  Bu alana 2 karakter girilmelidir!
+                </small>
+                <small class="text-danger" *ngIf="paymentForm.get('expireMonth')?.hasError('maxlength')">
+                  Bu alana 2 karakter girilmelidir!
+                </small>
+              </div>
+              <!--expireMonth validator info end-->
+
+            </div>
+
+            <div class="col-md-4">
+
+              <!--expireYear input-->
+              <div class="mt-3 mr-2 form-floating">
+                <input type="text" id="expireYear" formControlName="expireYear" placeholder="Yıl" class="form-control"
+                  mask='0000' minlength="4" maxlength="4" />
+                <label for="expireYear">Yıl</label>
+              </div>
+              <!--expireYear input end-->
+
+              <!--expireYear validator info-->
+              <div *ngIf="paymentForm.get('expireYear')?.invalid &&
+                        paymentForm.get('expireYear')?.errors &&
+                        (paymentForm.get('expireYear')?.dirty ||
+                        paymentForm.get('expireYear')?.touched)">
+                <small class="text-danger" *ngIf="paymentForm.get('expireYear')?.hasError('required')">
+                  Bu alan boş olamaz!
+                </small>
+                <small class="text-danger" *ngIf="paymentForm.get('expireYear')?.hasError('minlength')">
+                  Bu alana 4 karakter girilmelidir!
+                </small>
+                <small class="text-danger" *ngIf="paymentForm.get('expireYear')?.hasError('maxlength')">
+                  Bu alana 4 karakter girilmelidir!
+                </small>
+              </div>
+              <!--expireYear validator info end-->
+
+            </div>
+
+            <div class="col-md-4">
+
+              <!--cvc input-->
+              <div class="mt-3 mr-2 form-floating">
+                <input type="text" id="cvc" formControlName="cvc" placeholder="CVC" class="form-control" minlength="3"
+                  mask='000' maxlength="3" />
+                <label for="cvc">CVC</label>
+              </div>
+              <!--cvc input end-->
+
+              <!--cvc validator info-->
+              <div *ngIf="paymentForm.get('cvc')?.invalid &&
+                        paymentForm.get('cvc')?.errors &&
+                        (paymentForm.get('cvc')?.dirty ||
+                        paymentForm.get('cvc')?.touched)">
+                <small class="text-danger" *ngIf="paymentForm.get('cvc')?.hasError('required')">
+                  Bu alan boş olamaz!
+                </small>
+                <small class="text-danger" *ngIf="paymentForm.get('cvc')?.hasError('minlength')">
+                  Bu alana 3 karakter girilmelidir!
+                </small>
+                <small class="text-danger" *ngIf="paymentForm.get('cvc')?.hasError('maxlength')">
+                  Bu alana 3 karakter girilmelidir!
+                </small>
+              </div>
+              <!--cvc validator info end-->
+
+            </div>
+          </div>
+
+          <div class="form-check mb-3">
+            <input class="form-check-input" type="checkbox" id="save" formControlName="save">
+            <label class="form-check-label" for="save">
+              Kart bilgilerimin kayıt edilmesini istiyorum.
+            </label>
+          </div>
+
+          <div class="text-end">
+            <button class="btn btn-primary" [disabled]="paymentForm.invalid">
+              <i class="bi-credit-card-2-back me-1"></i> Ödeme Yap
+            </button>
+          </div>
+
+        </form>
+
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <app-saved-card (selectedCard)="setSelectedCard($event)"></app-saved-card>
+  </div>
+</div>

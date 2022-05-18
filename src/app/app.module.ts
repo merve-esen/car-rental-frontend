@@ -29,6 +29,7 @@ import { CarImageComponent } from './components/car-image/car-image.component';
 import { CarRentComponent } from './components/car-rent/car-rent.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
+import { PaymentComponent } from './components/payment/payment.component';
 
 import { FilterBrandPipe } from './pipes/filter-brand.pipe';
 import { FilterColorPipe } from './pipes/filter-color.pipe';
@@ -37,6 +38,7 @@ import { FilterCarDetailPipe } from './pipes/filter-car-detail.pipe';
 
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { AuthService } from './services/auth.service';
+import { SavedCardComponent } from './components/saved-card/saved-card.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +67,9 @@ import { AuthService } from './services/auth.service';
     CarImageComponent,
     LoginComponent,
     RegisterComponent,
-    CarRentComponent
+    CarRentComponent,
+    PaymentComponent,
+    SavedCardComponent
   ],
   imports: [
     BrowserModule,

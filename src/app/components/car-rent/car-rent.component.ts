@@ -87,7 +87,7 @@ export class CarRentComponent implements OnInit {
       }
 
       this.toastrService.success('Ödeme sayfasına yönlendiriliyorsunuz');
-      return this.router.navigate(['/cards']);
+      return this.router.navigate(['/payment', this.carId]);
     });
   }
 }
