@@ -15,8 +15,7 @@ import { CustomerCreditCardModel } from 'src/app/models/customerCreditCardModel'
 @Component({
   selector: 'app-payment',
   templateUrl: './payment.component.html',
-  styleUrls: ['./payment.component.css'],
-  providers: [RentalService]
+  styleUrls: ['./payment.component.css']
 })
 export class PaymentComponent implements OnInit {
 
@@ -62,11 +61,14 @@ export class PaymentComponent implements OnInit {
       expireYear: ["", [Validators.required, Validators.minLength(4), Validators.maxLength(4)]],
       expireMonth: ["", [Validators.required, Validators.minLength(2), Validators.maxLength(2)]],
       cvc: ["", [Validators.required, Validators.minLength(3), Validators.maxLength(3)]],
-      save: [true]
+      save: [true],
+      id: 0
     });
   }
 
   add() {
+    this.rentedCar = Object.assign({}, this.rentalService.getRentingCar());
+
     if (this.paymentForm.invalid) {
       return this.toastrService.warning('Bilgilerinizi kontrol ediniz');
     }

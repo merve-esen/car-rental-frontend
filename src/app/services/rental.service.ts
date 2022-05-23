@@ -11,6 +11,7 @@ import { ResponseModel } from '../models/responseModel';
 export class RentalService {
 
   apiControllerUrl = `${environment.apiUrl}/rentals`;
+  rentingCar: Rental;
 
   constructor(private httpClient: HttpClient) { }
 
@@ -37,4 +38,13 @@ export class RentalService {
       rental
     );
   }
+
+  setRentingCar(rental: Rental) {
+    this.rentingCar = rental;
+ }
+
+ getRentingCar() {
+    return this.rentingCar;
+ }
+
 }

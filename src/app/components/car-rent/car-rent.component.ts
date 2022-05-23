@@ -11,8 +11,7 @@ import { AuthService } from 'src/app/services/auth.service';
 @Component({
   selector: 'app-car-rent',
   templateUrl: './car-rent.component.html',
-  styleUrls: ['./car-rent.component.css'],
-  providers: [RentalService]
+  styleUrls: ['./car-rent.component.css']
 })
 
 export class CarRentComponent implements OnInit {
@@ -86,6 +85,7 @@ export class CarRentComponent implements OnInit {
         return;
       }
 
+      this.rentalService.setRentingCar(this.rental);
       this.toastrService.success('Ödeme sayfasına yönlendiriliyorsunuz');
       return this.router.navigate(['/payment', this.carId]);
     });
