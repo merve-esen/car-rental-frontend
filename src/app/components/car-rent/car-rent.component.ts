@@ -78,16 +78,24 @@ export class CarRentComponent implements OnInit {
     }
 
     this.rentalService.isRentable(this.rental).subscribe(response => {
-      if (!response.success) {
-        this.toastrService.warning(
-          'Bu aracı bu tarihler arasında kiralayamazsınız', 'Dikkat'
-        );
-        return;
+      if(response.success) {
+        this.rentalService.setRentingCar(this.rental);
+        this.toastrService.success('Ödeme sayfasına yönlendiriliyorsunuz');
+        return this.router.navigate(['/payment', this.carId]);
+      }
+      return false;
+    },responseError => {
+      if (responseError.error.ValidationErrors) {
+        for (let i = 0; i < responseError.error.ValidationErrors.length; i++) {
+          this.toastrService.error(
+            responseError.error.ValidationErrors[i].ErrorMessage, 'Doğrulama Hatası'
+          );
+        }
+        return false;
       }
 
-      this.rentalService.setRentingCar(this.rental);
-      this.toastrService.success('Ödeme sayfasına yönlendiriliyorsunuz');
-      return this.router.navigate(['/payment', this.carId]);
+      this.toastrService.error(responseError.error.message);
+      return false;
     });
   }
 }
