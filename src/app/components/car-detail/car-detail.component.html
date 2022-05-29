@@ -24,12 +24,12 @@
       </button>
     </div>
   </div>
-  <div *ngIf="carDetail" class="col-lg-6 my-auto">
+  <div *ngIf="carDetail" class="col-lg-6">
     <h1>{{ carDetail.brandName }}</h1>
     <hr style="width: 25%; opacity: 1; height: 2px">
     <ul class="list-unstyled">
       <li>
-        <h5><b>Model Adı / Açıklama: </b>{{ carDetail.carName }}</h5>
+        <h5><b>Model Adı: </b>{{ carDetail.carName }}</h5>
       </li>
       <li>
         <h5><b>Renk: </b>{{ carDetail.colorName }}</h5>

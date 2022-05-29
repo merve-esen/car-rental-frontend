@@ -6,6 +6,8 @@ import { RentalDetail } from '../models/rentalDetail';
 import { environment } from 'src/environments/environment';
 import { Rental } from '../models/rental';
 import { ResponseModel } from '../models/responseModel';
+import { SingleResponseModel } from '../models/singleResponseModel';
+import { RentPaymentRequest } from '../models/rentPaymentRequest';
 
 @Injectable()
 export class RentalService {
@@ -21,7 +23,7 @@ export class RentalService {
     );
   }
 
-  getRentalDetails():Observable<ListResponseModel<RentalDetail>> {
+  getRentalDetails(): Observable<ListResponseModel<RentalDetail>> {
     return this.httpClient.get<ListResponseModel<RentalDetail>>(`${this.apiControllerUrl}/getrentaldetails`);
   }
 
@@ -41,10 +43,15 @@ export class RentalService {
 
   setRentingCar(rental: Rental) {
     this.rentingCar = rental;
- }
+  }
 
- getRentingCar() {
+  getRentingCar() {
     return this.rentingCar;
- }
+  }
+
+  rent(rentRequest:RentPaymentRequest):Observable<SingleResponseModel<number>>{
+    let newPath = `${this.apiControllerUrl}/rent`;
+    return this.httpClient.post<SingleResponseModel<number>>(newPath,rentRequest);
+  }
 
 }

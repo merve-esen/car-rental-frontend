@@ -11,6 +11,7 @@ import { CreditCard } from 'src/app/models/creditCard';
 import { CreditCardService } from 'src/app/services/credit-card.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { CustomerCreditCardModel } from 'src/app/models/customerCreditCardModel';
+import { RentPaymentRequest } from 'src/app/models/rentPaymentRequest';
 
 @Component({
   selector: 'app-payment',
@@ -95,9 +96,19 @@ export class PaymentComponent implements OnInit {
   }
 
   addRental(rental: Rental) {
-    this.rentalService.add(rental).subscribe(responseSuccess => {
+    let rentRequest: RentPaymentRequest = Object.assign({}, this.paymentForm.value);
+    rentRequest.customerId = this.currentUser.id;
+    //rentRequest.amount = this.calculateTotalAmount();
+    rentRequest.rental = rental;
+    rentRequest.cardNumber = this.creditCard.cardNumber;
+    rentRequest.expireYear = this.creditCard.expireYear;
+    rentRequest.expireMonth = this.creditCard.expireMonth;
+    rentRequest.cvc = this.creditCard.cvc;
+    rentRequest.cardHolderFullName = this.creditCard.cardHolderFullName;
+
+    this.rentalService.rent(rentRequest).subscribe(responseSuccess => {
       this.toastrService.success(responseSuccess.message, 'Başarılı');
-      this.updateCurrentCustomerFindexPoint();
+      //this.updateCurrentCustomerFindexPoint();
 
       return this.router.navigate(['']);
     }, responseError => {
