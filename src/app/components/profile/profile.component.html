@@ -1,0 +1,84 @@
+<div class="container">
+  <div class="row card-group">
+      <div class="col-md-6">
+          <div class="row card">
+              <div class="card-header text-center text-white bg-primary" style="font-weight: bold;">
+                  Bilgilerim</div>
+              <div class="card-body">
+                  <div class="row">
+                      <div class="col-md-5  text-end">
+                          <strong>E-mail:</strong>
+                      </div>
+                      <div class="col-md-7">
+                          <p>{{currentUser.email}}</p>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-md-5 text-end">
+                          <strong>Ad-Soyad:</strong>
+                      </div>
+                      <div class="col-md-7">
+                          <p>{{currentUser.name}}</p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="row card mt-1">
+              <div class="card-header text-center text-white bg-primary" style="font-weight: bold;">
+                  Bilgileri Güncelle</div>
+              <div class="card-body">
+                  <form [formGroup]="updateProfileForm">
+                      <div class="row">
+                          <div class="col-md-6">
+                              <div class="form-floating">
+                                  <input formControlName="firstName" type="text" class="form-control"
+                                      id="updatefirstname" placeholder="Ad">
+                                  <label for="signinemail">Ad</label>
+                              </div>
+                          </div>
+                          <div class="col-md-6">
+                              <div class="form-floating">
+                                  <input formControlName="lastName" type="text" class="form-control"
+                                      id="updatelastname" placeholder="Soyad">
+                                  <label for="signinemail">Soyad</label>
+                              </div>
+                          </div>
+                      </div>
+                  </form>
+              </div>
+              <div class="card-footer d-grid gap-2">
+                  <button (click)="updateProfile()" class="btn btn-success float-end px-3">Güncelle</button>
+              </div>
+          </div>
+      </div>
+      <div class="col-md-6">
+          <div class="card h-100">
+              <div class="card-header text-center text-white bg-primary" style="font-weight: bold;">
+                  Şifreyi Değiştir</div>
+              <div class="card-body">
+                  <form [formGroup]="changePasswordForm">
+                      <div class="form-floating">
+                          <input formControlName="oldPassword" type="password" class="form-control" id="oldPassword"
+                              placeholder="Mevcut şifre">
+                          <label for="oldPassword">Eski şifre</label>
+                      </div>
+                      <div class="form-floating mt-3">
+                          <input formControlName="newPassword" type="password" class="form-control" id="newpassword"
+                              placeholder="Yeni şifre">
+                          <label for="newpassword">Yeni şifre</label>
+                      </div>
+                      <div class="form-floating mt-3">
+                          <input formControlName="confirmNewPassword" type="password" class="form-control"
+                              id="confirmnewpassword" placeholder="Yeni şifre tekrar">
+                          <label for="confirmnewpassword">Yeni şifre tekrar</label>
+                      </div>
+
+                  </form>
+              </div>
+              <div class="card-footer d-grid gap-2">
+                  <button (click)="changePassword()" class="btn btn-success btn-block">Değiştir</button>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

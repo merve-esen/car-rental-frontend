@@ -9,6 +9,8 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { LocalStorageService } from './local-storage.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { User } from '../models/user';
+import { ResponseModel } from '../models/responseModel';
+import { ChangePasswordModel } from '../models/changePasswordModel';
 
 @Injectable()
 export class AuthService {
@@ -46,6 +48,11 @@ export class AuthService {
   register(registerModel: RegisterModel): Observable<SingleResponseModel<TokenModel>> {
     let path = `${this.apiControllerUrl}/register`;
     return this.httpClient.post<SingleResponseModel<TokenModel>>(path, registerModel);
+  }
+
+  changePassword(updatedUser: ChangePasswordModel): Observable<ResponseModel> {
+    let path = `${this.apiControllerUrl}/changepassword`
+    return this.httpClient.post<ResponseModel>(path, updatedUser);
   }
 
   /*isAuthenticated() {

@@ -40,6 +40,7 @@ import { FilterCarDetailPipe } from './pipes/filter-car-detail.pipe';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { AuthService } from './services/auth.service';
 import { RentalService } from './services/rental.service';
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +71,8 @@ import { RentalService } from './services/rental.service';
     RegisterComponent,
     CarRentComponent,
     PaymentComponent,
-    SavedCardComponent
+    SavedCardComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

@@ -19,6 +19,7 @@ import { CarImageComponent } from './components/car-image/car-image.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { PaymentComponent } from './components/payment/payment.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 const routes: Routes = [
   {path:"", pathMatch:"full", component:CarListComponent},
@@ -41,6 +42,7 @@ const routes: Routes = [
   {path:"rentals", component:RentalComponent, canActivate: [LoginGuard]},
   {path:"login", component:LoginComponent, canActivate: [LoginGuard]},
   {path:"register", component:RegisterComponent, canActivate: [LoginGuard]},
+  {path:"profile", component:ProfileComponent, canActivate: [LoginGuard]},
   {path:"payment/:carId", component:PaymentComponent, canActivate: [LoginGuard]}
 ];
 
